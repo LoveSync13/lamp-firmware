@@ -1,0 +1,23 @@
+#include <EEPROM.h>
+
+#define EEPROM_SIZE 512  // можно 512, 1024, 4096 — зависит от твоего проекта
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println();
+  Serial.println("Очистка EEPROM...");
+
+  EEPROM.begin(EEPROM_SIZE);  // инициализация EEPROM
+
+  // Проходим по всем ячейкам и записываем 0xFF (пусто)
+  for (int i = 0; i < EEPROM_SIZE; i++) {
+    EEPROM.write(i, 0xFF);
+  }
+
+  EEPROM.commit(); // сохраняем изменения во флеш
+  Serial.println("EEPROM успешно очищена!");
+}
+
+void loop() {
+  // ничего не делаем
+}
